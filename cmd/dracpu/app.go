@@ -24,6 +24,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"runtime/debug"
 	"sync/atomic"
 	"time"
@@ -113,6 +114,13 @@ func init() {
 }
 
 func main() {
+	if filepath.Base(os.Args[0]) == "dracpu-debuginfo" {
+		if err := runDebugInfo(); err != nil {
+			fmt.Fprintf(os.Stderr, "dracpu-debuginfo: %v\n", err)
+			os.Exit(1)
+		}
+		return
+	}
 	config := textlogger.NewConfig()
 	config.AddFlags(flag.CommandLine)
 	flag.Parse()
