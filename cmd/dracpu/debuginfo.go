@@ -1,5 +1,5 @@
 /*
-Copyright 2025 The Kubernetes Authors.
+Copyright The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,14 +24,12 @@ import (
 	"github.com/kubernetes-sigs/dra-driver-cpu/pkg/cpuinfo"
 )
 
-// debugInfo is the top-level output structure for dracpu-debuginfo.
 type debugInfo struct {
 	Topology *cpuinfo.CPUTopology `json:"topology"`
 	CPUs     []cpuinfo.CPUInfo    `json:"cpus"`
 }
 
 // runDebugInfo collects CPU topology data and prints it as JSON to stdout.
-// It is invoked when the binary is called as "dracpu-debuginfo" (via symlink).
 func runDebugInfo() error {
 	sys := cpuinfo.NewSystemCPUInfo()
 
